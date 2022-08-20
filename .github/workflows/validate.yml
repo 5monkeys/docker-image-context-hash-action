@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          npm run ci
+          npm ci
           git add -A
           npm run package
           if [ -n "$(git status --porcelain -- dist)" ]; then
