@@ -4040,7 +4040,6 @@ async function run() {
         "utf-8"
       ),
     });
-    core.info(hash.stdout.trim());
     core.endGroup();
 
     core.setOutput("hash", hash.stdout.trim());
