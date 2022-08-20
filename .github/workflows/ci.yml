@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate hash
+        id: generate
+        uses: ./
+        with:
+          build_context: ./test/
+      - name: Check
+        run: |
+          echo "${{ toJson(steps.generate) }}"
+          # Expected hash generated from command below
+          # {\
+          #   git ls-tree -r --format='%(objectname)' HEAD \
+          #     test/a/b \
+          #     test/context/file \
+          #     test/filename \
+          #     test/.dockerignore \
+          #     test/Dockerfile\
+          #   ; \
+          #   printf "test/a/b\ntest/context/file\ntest/filename\ntest/.dockerignore\ntest/Dockerfile" | \
+          #     git hash-object --stdin\
+          #   ;\
+          # } | git hash-object --stdin
+          if [ "${{ steps.generate.hash }}" != "6d09883618bd309806be67847737b1a5a4aa1f40"]; then
+            echo "::error::Invalid hash value"
+            exit 1
+          fi
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      # TODO: Coverage

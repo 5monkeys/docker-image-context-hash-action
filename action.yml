@@ -1,0 +1,25 @@
+name: "docker-image-context-hash"
+description: "Generates a hash for a docker image context"
+author: '5monkeys'
+branding:
+  icon: 'layers'
+  color: 'yellow'
+
+inputs:
+  build_context:
+    description: "What path to give to docker as build context"
+    default: '.'
+  extra_tree_objects:
+    description: "Tree objects (files) to be included in addition to the docker image context"
+    required: false
+  extra_values:
+    description: "Additional values that should be included when generating the hash"
+    required: false
+
+outputs:
+  hash:
+    description: 'An object ID of a docker image context'
+
+runs:
+  using: 'node18'
+  main: 'dist/index.js'
