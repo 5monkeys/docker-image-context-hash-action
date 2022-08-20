@@ -3997,7 +3997,7 @@ async function run() {
     tree_object_paths.push(...extra_tree_objects);
     // TODO: If we format `%(path)` as well, there's no need for the follow up
     //       `hash-object` of filenames below, right?
-    const ls_tree_cmd = ["ls-tree", "-r", "--format=%(objectname)", "HEAD"];
+    const ls_tree_cmd = ["ls-tree", "-r", "--format=%(objectname)", "--full-tree", "HEAD"];
     ls_tree_cmd.push(...tree_object_paths);
     const tree_object_names = await exec.getExecOutput("git", ls_tree_cmd, {
       failOnStdErr: true,

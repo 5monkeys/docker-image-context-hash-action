@@ -13,7 +13,7 @@ describe("run", () => {
     process.env["INPUT_EXTRA_VALUES"] = "test/.dockerignore\ntest/Dockerfile";
     // Expected hash generated from command below
     // {\
-    //   git ls-tree -r --format='%(objectname)' HEAD \
+    //   git ls-tree -r --format='%(objectname)' --full-tree HEAD \
     //     test/a/b \
     //     test/context/file \
     //     test/filename \
