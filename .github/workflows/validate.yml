@@ -16,11 +16,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '16.x'
       - name: Validate build
         shell: bash
         run: |
           set -e
+          npm run ci
           git add -A
           npm run package
           if [ -n "$(git status --porcelain -- dist)" ]; then

@@ -19,6 +19,12 @@ jobs:
         uses: ./
         with:
           build_context: ./test/
+          extra_tree_objects: |
+            test/.dockerignore
+            test/Dockerfile
+          extra_values: |
+            test/.dockerignore
+            test/Dockerfile
       - name: Check
         run: |
           echo "${{ toJson(steps.generate) }}"
@@ -46,7 +52,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '16.x'
       - run: npm ci
       - run: npm run lint
       - run: npm test
