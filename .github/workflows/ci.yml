@@ -41,7 +41,7 @@ jobs:
       - name: Check
         run: |
           echo "${{ toJson(steps.generate) }}"
-          if [ "${{ steps.generate.hash }}" != "6d09883618bd309806be67847737b1a5a4aa1f40" ]; then
+          if [ "${{ steps.generate.outputs.hash }}" != "6d09883618bd309806be67847737b1a5a4aa1f40" ]; then
             echo "::error::Invalid hash value"
             exit 1
           fi
