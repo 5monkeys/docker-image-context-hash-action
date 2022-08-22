@@ -12,9 +12,6 @@ inputs:
   extra_tree_objects:
     description: "Tree objects (files) to be included in addition to the docker image context"
     required: false
-  extra_values:
-    description: "Additional values that should be included when generating the hash"
-    required: false
 
 outputs:
   hash:
