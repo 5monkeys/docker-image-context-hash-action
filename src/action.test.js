@@ -4,6 +4,8 @@ const os = require("os");
 const uuid = require("uuid");
 const { test, beforeEach, describe } = require("@jest/globals");
 
+jest.mock("uuid");
+
 const UUID = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
 const DELIMITER = `ghadelimiter_${UUID}`;
 
