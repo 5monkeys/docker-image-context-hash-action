@@ -52,7 +52,7 @@ describe("run", () => {
     // git hash-object --stdin
     const expectedOutput = serializeOutput(
       "hash",
-      "6c867c528d4bf0844d5176f78f6abfee0adfff2b"
+      "6c867c528d4bf0844d5176f78f6abfee0adfff2b",
     );
 
     await run();
@@ -71,8 +71,8 @@ describe("run", () => {
     await run();
     expect(process.stdout.write).toHaveBeenLastCalledWith(
       expect.stringMatching(
-        `::error::The process '.*/docker' failed with exit code 1[^0-9]`
-      )
+        `::error::The process '.*/docker' failed with exit code 1[^0-9]`,
+      ),
     );
     expect(setFailedMock).toHaveBeenCalled();
   });
