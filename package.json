@@ -16,7 +16,9 @@
   },
   "keywords": [
     "github",
-    "actions"
+    "actions",
+    "docker",
+    "image"
   ],
   "author": "5monkeys",
   "license": "MIT",
