@@ -1,3 +1,4 @@
+const core = require("@actions/core");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
@@ -20,6 +21,7 @@ describe("run", () => {
   });
 
   beforeEach(() => {
+    jest.spyOn(process, "exitCode", "set").mockReturnValue(0);
     process.env["GITHUB_OUTPUT"] = GITHUB_OUTPUT;
     process.stdout.write = jest.fn();
 
@@ -63,6 +65,7 @@ describe("run", () => {
   }, 30000);
 
   test("errors when given an invalid build context", async () => {
+    const setFailedMock = jest.spyOn(core, "setFailed");
     const { run } = require("./action");
     process.env["INPUT_BUILD_CONTEXT"] = "./invalid";
     await run();
@@ -71,6 +74,7 @@ describe("run", () => {
         `::error::The process '.*/docker' failed with exit code 1[^0-9]`
       )
     );
+    expect(setFailedMock).toHaveBeenCalled();
   });
 });
 
