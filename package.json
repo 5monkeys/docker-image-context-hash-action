@@ -1,8 +1,8 @@
 {
   "name": "docker-image-context-hash-action",
   "private": true,
-  "version": "1.0.0",
-  "description": "GitHub Action to generate a hash from a docker image context",
+  "version": "2.0.0",
+  "description": "GitHub Action to calculate a hash from a docker image context",
   "main": "index.js",
   "scripts": {
     "test": "jest --collectCoverage",
