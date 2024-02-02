@@ -22,7 +22,7 @@ async function run() {
         {
           input: Buffer.from(dockerfile, "utf-8"),
           env: { DOCKER_SCAN_SUGGEST: "false" },
-        }
+        },
       );
     });
 
