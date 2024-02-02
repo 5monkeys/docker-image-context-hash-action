@@ -1,5 +1,5 @@
 name: "docker-image-context-hash"
-description: "Generates a hash for a docker image context"
+description: "Calculates a hash for a docker image context"
 author: '5monkeys'
 branding:
   icon: 'layers'
@@ -18,5 +18,5 @@ outputs:
     description: 'An object ID of a docker image context'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
