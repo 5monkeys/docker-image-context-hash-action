@@ -3978,7 +3978,7 @@ async function run() {
     await core.group(`Build context image`, async () => {
       await exec.exec(
         "docker",
-        ["build", "--progress", "plain", "-f-", "-t", "hasher", build_context],
+        ["build", "-f-", "-t", "hasher", build_context],
         {
           input: Buffer.from(dockerfile, "utf-8"),
           env: { DOCKER_SCAN_SUGGEST: "false" },
@@ -3988,7 +3988,7 @@ async function run() {
 
     core.startGroup(`Collect image context`);
     const image_context = await exec
-      .getExecOutput("docker", ["run", "--rm", "hasher"], {
+      .getExecOutput("docker", ["run", "--pull", "never", "--rm", "hasher"], {
         failOnStdErr: true,
       })
       .then((res) => {
