@@ -17,16 +17,15 @@ This could be leveraged to e.g.
 - Push docker images with tags that can be found in different contexts, across the Git
   repository as a whole. For example: a release workflow could find an image built by a
   test workflow.
-- Skip unnecessary image builds if there has been no changes to all files included in
+- Skip unnecessary image builds if there has been no changes to any files included in
   the maximal Docker image context.
 
-While using e.g. a Git commit hash, rather than a hash of the Docker image context,
-could work correspondingly it is more sensitive. For example: if no contents of a Docker
-image context has changed between 2 commit hashes, the hash calculation produces
-identical output.
+While using e.g. a Git commit hash could work correspondingly it is more sensitive. For
+example: if contents of a Docker image context hasn't changed between 2 commits, the
+hash calculation produces identical output.
 
 Note that `docker-image-context-hash-action` does _not_ calculate the hash of the
-_actual_ Docker image context. Only the _maximal_ Docker image context.
+_actual_ Docker image context.
 
 ---
 
@@ -71,14 +70,14 @@ jobs:
           tags: your-image:${{ steps.context-hash.outputs.hash }}
 ```
 
-In this example, the `docker-image-context-hash-action` is used to calculate the SHA256
-hash of the current path as Docker image context, and the resulting hash is used as part
+In this example, the `docker-image-context-hash-action` is used to calculate the hash
+of the current path as Docker image context, and the resulting hash is used as part
 of the Docker image tag when building and pushing the image.
 
 The files `.dockerignore` and `Dockerfile` are added as extra Git tree objects since
 they are implicitly excluded from the image context by Docker. Having them as extra Git
-tree objects results in that any changes to them are tracked identically to files
-included in the image context.
+tree objects results in tracking changes to them identically to files included in the
+image context.
 
 Note that the [docker/build-push-action](https://github.com/docker/build-push-action) is
 used in the example to build and push the Docker image, but this can be replaced with
